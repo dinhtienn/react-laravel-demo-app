@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('posts')->name('posts.')->group(function () {
+    Route::get('', 'PostController@index')->name('index'); //Danh sách
+    Route::post('', 'PostController@store')->name('store'); //Lưu
+    Route::get('{post}', 'PostController@show')->name('show'); //Chi tiết
+    Route::post('{post}', 'PostController@update')->name('update'); //Cập nhập
+    Route::post('delete/{post}', 'PostController@delete')->name('delete'); //Xóa
+});
